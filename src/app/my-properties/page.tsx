@@ -1,7 +1,32 @@
+"use client";
+
 import Image from "next/image";
 import FlatImage from "../../../public/FlatImage.png";
+import { useEffect } from "react";
+import { Build21PropertyAbi } from "src/Abi";
+import { scAddress } from "src/constants";
+import { useAccount, usePublicClient } from "wagmi";
 
 const page = () => {
+  const { address } = useAccount();
+  const publicClient = usePublicClient();
+
+  useEffect(() => {
+    console.log("Address:", address);
+    if (!address || !publicClient) return;
+
+    publicClient
+      .readContract({
+        address: scAddress,
+        abi: Build21PropertyAbi,
+        functionName: "balanceOf",
+        args: [address],
+      })
+      .then((balance) => {
+        console.log("Balance:", balance);
+      });
+  }, [address, publicClient]);
+
   return (
     <div className="flex flex-col w-[1200px] mb-96">
       <section id="home" className="flex flex-col mt-20 lg:mt-8">
