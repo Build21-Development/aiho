@@ -25,7 +25,6 @@ const page = () => {
         args: [address],
       })
       .then((balance) => {
-        console.log("Balance:", balance);
         const tokenIdsPromises = [];
         for (let i = 0; i < balance; i++) {
           tokenIdsPromises.push(
@@ -83,7 +82,7 @@ const page = () => {
           </div>
         )}
         {tokenIds.map((tokenId) => (
-          <a href="/property" key={tokenId}>
+          <a href={"/property/" + tokenId} key={tokenId}>
             <div className="flex flex-col justify-center bg-white rounded-3xl">
               <div className="rounded-3xl">
                 <Image
