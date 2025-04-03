@@ -12,22 +12,19 @@ import type {
 } from "@coinbase/onchainkit/transaction";
 import { BASE_SEPOLIA_CHAIN_ID } from "../constants";
 import type { ContractFunctionParameters } from "viem";
+import { Build21PropertyAbi } from "src/Abi";
 
 export default function TransactionWrapper({
   calls,
   buttonText,
+  handleError,
+  handleSuccess,
 }: {
-  calls: ContractFunctionParameters[];
+  calls: ContractFunctionParameters<typeof Build21PropertyAbi>[];
   buttonText?: string;
+  handleError?: (err: TransactionError) => void;
+  handleSuccess?: (response: TransactionResponse) => void;
 }) {
-  const handleError = (err: TransactionError) => {
-    console.error("Transaction error:", err);
-  };
-
-  const handleSuccess = (response: TransactionResponse) => {
-    console.log("Transaction successful", response);
-  };
-
   return (
     <div className="flex w-[450px]">
       <Transaction
