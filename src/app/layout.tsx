@@ -39,6 +39,7 @@ export default function RootLayout({
             <Navbar />
           </div>
           <main>{children}</main>
+          <Footer />
         </OnchainProviders>
       </body>
     </html>
