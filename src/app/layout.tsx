@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { NEXT_PUBLIC_URL } from "../config";
-
+import Footer from "src/components/Footer";
+import Navbar from "src/components/Navbar";
 import "./global.css";
 import "@coinbase/onchainkit/styles.css";
 import "@rainbow-me/rainbowkit/styles.css";
 import dynamic from "next/dynamic";
 
 const OnchainProviders = dynamic(
-  () => import("src/components/OnchainProviders"),
+  () => import("src/components/OnchainProviders")
 );
 
 export const viewport = {
@@ -32,8 +33,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="flex items-center justify-center">
-        <OnchainProviders>{children}</OnchainProviders>
+      <body className="flex items-center justify-center bg-gray-50">
+        <OnchainProviders>
+          <div className="flex flex-row justify-center items-center">
+            <Navbar />
+          </div>
+          <main>{children}</main>
+        </OnchainProviders>
       </body>
     </html>
   );
