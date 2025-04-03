@@ -1,11 +1,5 @@
 "use client";
 import Hero from "src/components/Hero";
-import WalletWrapper from "src/components/WalletWrapper";
-import { ONCHAINKIT_LINK } from "src/links";
-import OnchainkitSvg from "src/svg/OnchainkitSvg";
-
-import SignupButton from "../components/SignupButton";
-import TransactionWrapper from "src/components/TransactionWrapper";
 
 export default function Page() {
   return (

@@ -1,50 +1,46 @@
-'use client';
+"use client";
 import {
   Transaction,
   TransactionButton,
   TransactionStatus,
   TransactionStatusAction,
   TransactionStatusLabel,
-} from '@coinbase/onchainkit/transaction';
+} from "@coinbase/onchainkit/transaction";
 import type {
   TransactionError,
   TransactionResponse,
-} from '@coinbase/onchainkit/transaction';
-import type { Address, ContractFunctionParameters } from 'viem';
-import {
-  BASE_SEPOLIA_CHAIN_ID,
-  mintABI,
-  mintContractAddress,
-} from '../constants';
+} from "@coinbase/onchainkit/transaction";
+import { BASE_SEPOLIA_CHAIN_ID } from "../constants";
+import type { ContractFunctionParameters } from "viem";
 
-export default function TransactionWrapper({ address }: { address: Address }) {
-  const contracts = [
-    {
-      address: mintContractAddress,
-      abi: mintABI,
-      functionName: 'mint',
-      args: [address],
-    },
-  ] as unknown as ContractFunctionParameters[];
-
+export default function TransactionWrapper({
+  calls,
+  buttonText,
+}: {
+  calls: ContractFunctionParameters[];
+  buttonText?: string;
+}) {
   const handleError = (err: TransactionError) => {
-    console.error('Transaction error:', err);
+    console.error("Transaction error:", err);
   };
 
   const handleSuccess = (response: TransactionResponse) => {
-    console.log('Transaction successful', response);
+    console.log("Transaction successful", response);
   };
 
   return (
     <div className="flex w-[450px]">
       <Transaction
-        contracts={contracts}
+        calls={calls}
         className="w-[450px]"
         chainId={BASE_SEPOLIA_CHAIN_ID}
         onError={handleError}
         onSuccess={handleSuccess}
       >
-        <TransactionButton className="mt-0 mr-auto ml-auto w-[450px] max-w-full text-[white]" />
+        <TransactionButton
+          className="mt-0 mr-auto ml-auto w-[450px] max-w-full text-[white]"
+          text={buttonText}
+        />
         <TransactionStatus>
           <TransactionStatusLabel />
           <TransactionStatusAction />

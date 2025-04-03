@@ -1,7 +1,49 @@
+"use client";
+
 import Image from "next/image";
 import FlatImage from "../../../public/FlatImage.png";
+import { useEffect, useState } from "react";
+import { Build21PropertyAbi } from "src/Abi";
+import { scAddress } from "src/constants";
+import { useAccount, usePublicClient } from "wagmi";
 
 const page = () => {
+  const { address } = useAccount();
+  const publicClient = usePublicClient();
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [tokenIds, setTokenIds] = useState<number[]>([]);
+
+  useEffect(() => {
+    if (!address || !publicClient) return;
+
+    publicClient
+      .readContract({
+        address: scAddress,
+        abi: Build21PropertyAbi,
+        functionName: "balanceOf",
+        args: [address],
+      })
+      .then((balance) => {
+        console.log("Balance:", balance);
+        const tokenIdsPromises = [];
+        for (let i = 0; i < balance; i++) {
+          tokenIdsPromises.push(
+            publicClient.readContract({
+              address: scAddress,
+              abi: Build21PropertyAbi,
+              functionName: "tokenOfOwnerByIndex",
+              args: [address, BigInt(i)],
+            }),
+          );
+        }
+        Promise.all(tokenIdsPromises).then((ids) => {
+          setTokenIds(ids.map((id) => Number(id)));
+          setIsLoading(false);
+        });
+      });
+  }, [address, publicClient]);
+
   return (
     <div className="flex flex-col w-[1200px] mb-96">
       <section id="home" className="flex flex-col mt-20 lg:mt-8">
@@ -30,67 +72,39 @@ const page = () => {
         </div>
       </section>
       <section className="grid grid-cols-3 gap-4 w-full mt-12">
-        <a href="/property">
-          <div className="flex flex-col justify-center bg-white rounded-3xl">
-            <div className="rounded-3xl">
-              <Image
-                src={FlatImage}
-                alt="Aiho logo"
-                width={1200}
-                height={37.5}
-                className="rounded-t-3xl"
-              />
-            </div>
-            <div className="p-6 flex flex-col">
-              <h3 className="text-xl font-semibold">Flat 21</h3>
-              <h4 className="text-gray-400">12 Ursula St</h4>
-              <div className="flex flex-row justify-between items-center mt-4">
-                <div className="font-semibold">Real Estate Developer</div>
-                <div className="text-gray-400">Build21</div>
+        {isLoading && (
+          <div className="flex justify-center items-center w-full h-96">
+            <p className="text-gray-500">Loading...</p>
+          </div>
+        )}
+        {!isLoading && tokenIds.length === 0 && (
+          <div className="flex justify-center items-center w-full h-96">
+            <p className="text-gray-500">No properties found.</p>
+          </div>
+        )}
+        {tokenIds.map((tokenId) => (
+          <a href="/property" key={tokenId}>
+            <div className="flex flex-col justify-center bg-white rounded-3xl">
+              <div className="rounded-3xl">
+                <Image
+                  src={FlatImage}
+                  alt="Aiho logo"
+                  width={1200}
+                  height={37.5}
+                  className="rounded-t-3xl"
+                />
+              </div>
+              <div className="p-6 flex flex-col">
+                <h3 className="text-xl font-semibold">Flat {tokenId}</h3>
+                <h4 className="text-gray-400">12 Ursula St</h4>
+                <div className="flex flex-row justify-between items-center mt-4">
+                  <div className="font-semibold">Real Estate Developer</div>
+                  <div className="text-gray-400">Build21</div>
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-
-        <div className="flex flex-col justify-center bg-white rounded-3xl">
-          <div className="rounded-3xl">
-            <Image
-              src={FlatImage}
-              alt="Aiho logo"
-              width={1200}
-              height={37.5}
-              className="rounded-t-3xl"
-            />
-          </div>
-          <div className="p-6 flex flex-col">
-            <h3 className="text-xl font-semibold">Flat 21</h3>
-            <h4 className="text-gray-400">12 Ursula St</h4>
-            <div className="flex flex-row justify-between items-center mt-4">
-              <div className="font-semibold">Real Estate Developer</div>
-              <div className="text-gray-400">Build21</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col justify-center bg-white rounded-3xl">
-          <div className="rounded-3xl">
-            <Image
-              src={FlatImage}
-              alt="Aiho logo"
-              width={1200}
-              height={37.5}
-              className="rounded-t-3xl"
-            />
-          </div>
-          <div className="p-6 flex flex-col">
-            <h3 className="text-xl font-semibold">Flat 21</h3>
-            <h4 className="text-gray-400">12 Ursula St</h4>
-            <div className="flex flex-row justify-between items-center mt-4">
-              <div className="font-semibold">Real Estate Developer</div>
-              <div className="text-gray-400">Build21</div>
-            </div>
-          </div>
-        </div>
+          </a>
+        ))}
       </section>
     </div>
   );
