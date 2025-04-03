@@ -4,7 +4,7 @@ import FlatImage from "../../../public/FlatImage.png";
 const page = () => {
   return (
     <div className="flex flex-col w-[1200px] mb-96">
-      <section id="home" className="flex md:flex-row flex-col mt-20 lg:mt-8">
+      <section id="home" className="flex flex-col mt-20 lg:mt-8">
         <div className="flex-col justify-center items-center w-[1200px] px-6">
           <div className="flex flex-row justify-between items-start mt-32">
             <h1 className="flex-1 flex-col font-poppins font-semibold text-5xl mb-6 text-center">
@@ -15,6 +15,18 @@ const page = () => {
           <p className="w-full mt-2 text-darkBlue text-center">
             All your properties intelligently managed in one place.
           </p>
+
+          <div className="flex flex-col justify-center items-center mt-6">
+            <h2 className="font-poppins font-semibold text-xl mb-2 text-center">
+              Get a mock property NFT
+            </h2>
+            <a
+              href="/faucet"
+              className="px-2 py-1 rounded-lg mt-2 hover:text-black text-gray-500 text-center border-2 hover:border-black border-gray-500"
+            >
+              Go to faucet
+            </a>
+          </div>
         </div>
       </section>
       <section className="grid grid-cols-3 gap-4 w-full mt-12">

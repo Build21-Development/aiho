@@ -1,6 +1,6 @@
 import Image from "next/image";
 import FlatImage from "../../../public/FlatImage.png";
-import PropertyCard from "../../../public/modules/PropertyCard.png";
+import module1 from "../../../public/modules/1.png";
 
 const page = () => {
   return (
@@ -36,7 +36,7 @@ const page = () => {
               <div className="flex flex-row gap-4 items-start">
                 <div className="flex flex-col items-center justify-center gap-1">
                   <Image
-                    src={PropertyCard}
+                    src={module1}
                     alt="Module Icon"
                     width={50}
                     height={50}
@@ -46,7 +46,7 @@ const page = () => {
                 </div>
                 <div className="flex flex-col items-center justify-center gap-1">
                   <Image
-                    src={PropertyCard}
+                    src={module1}
                     alt="Module Icon"
                     width={50}
                     height={50}
@@ -56,7 +56,7 @@ const page = () => {
                 </div>
                 <div className="flex flex-col items-center justify-center gap-1">
                   <Image
-                    src={PropertyCard}
+                    src={module1}
                     alt="Module Icon"
                     width={50}
                     height={50}
