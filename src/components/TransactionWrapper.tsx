@@ -11,9 +11,15 @@ import type {
   TransactionResponse,
 } from "@coinbase/onchainkit/transaction";
 import { BASE_SEPOLIA_CHAIN_ID } from "../constants";
-import { Calls } from "node_modules/@coinbase/onchainkit/esm/transaction/types";
+import type { ContractFunctionParameters } from "viem";
 
-export default function TransactionWrapper({ calls }: { calls: Calls }) {
+export default function TransactionWrapper({
+  calls,
+  buttonText,
+}: {
+  calls: ContractFunctionParameters[];
+  buttonText?: string;
+}) {
   const handleError = (err: TransactionError) => {
     console.error("Transaction error:", err);
   };
@@ -31,7 +37,10 @@ export default function TransactionWrapper({ calls }: { calls: Calls }) {
         onError={handleError}
         onSuccess={handleSuccess}
       >
-        <TransactionButton className="mt-0 mr-auto ml-auto w-[450px] max-w-full text-[white]" />
+        <TransactionButton
+          className="mt-0 mr-auto ml-auto w-[450px] max-w-full text-[white]"
+          text={buttonText}
+        />
         <TransactionStatus>
           <TransactionStatusLabel />
           <TransactionStatusAction />

@@ -1,6 +1,6 @@
-import Image from "next/image";
-import FlatImage from "../../../public/FlatImage.png";
-import PropertyCard from "../../../public/modules/PropertyCard.png";
+import TransactionWrapper from "src/components/TransactionWrapper";
+import { scAddress } from "src/constants";
+import { Build21PropertyAbi } from "src/Abi";
 
 const page = () => {
   return (
@@ -13,12 +13,16 @@ const page = () => {
                 Get your mock property NFT
               </h1>
               <h2 className="text-lg text-center">Max 3 claims per wallet.</h2>
-              <a
-                href="/faucet"
-                className="mt-10 px-2 py-1 rounded-lg text-center text-white bg-black w-[100px]"
-              >
-                Claim
-              </a>
+              <TransactionWrapper
+                buttonText="Claim"
+                calls={[
+                  {
+                    address: scAddress,
+                    abi: Build21PropertyAbi,
+                    functionName: "faucetMint",
+                  },
+                ]}
+              />
               <div className="flex flex-row gap-4 items-start"></div>
             </div>
           </div>
