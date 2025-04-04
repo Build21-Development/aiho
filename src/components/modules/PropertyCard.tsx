@@ -82,8 +82,7 @@ const PropertyCard = () => {
                 <span className="font-medium text-gray-400">
                   Uploaded:{" "}
                   {new Date(doc.timestamp * 1000).toLocaleDateString()}{" "}
-                  {new Date(doc.timestamp * 1000).toLocaleTimeString()} / Size:
-                  1mb
+                  {new Date(doc.timestamp * 1000).toLocaleTimeString()}
                 </span>
               </div>
 
@@ -134,7 +133,7 @@ const PropertyCard = () => {
                 newPropertyCardDocument(
                   Number(propertyId),
                   fileName,
-                  base64File,
+                  base64File
                 )
                   .then(() => {
                     refreshDocuments();
