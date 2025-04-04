@@ -1,5 +1,5 @@
 import Image from "next/image";
-import module0 from "../../../public/modules/1.png";
+import module0 from "../../../public/modules/0.png";
 import module1 from "../../../public/modules/1.png";
 import module2 from "../../../public/modules/2.png";
 import module3 from "../../../public/modules/3.png";
@@ -20,25 +20,27 @@ const page = () => {
           </div>
 
           <p className="max-w-[700px] mt-2 text-darkBlue w-3/4">
-            For those concerned about data storage, all data from the modules—as
-            well as the modules' applications-run in a decentralized manner on
-            the Ratio1 Edge Nodes Network, gated by your Property NFTs.
+            For those concerned about data storage, all data from the modules -
+            as well as the modules' applications - run in a decentralized manner
+            on the Ratio1 Edge Nodes Network, gated by your Property NFTs.
           </p>
         </div>
       </section>
-      <div className="grid grid-cols-3 w-[1200px] gap-2">
+      <div className="grid grid-cols-3 w-[1200px] gap-6">
         <div className="flex flex-col justify-start items-start bg-white rounded-3xl">
           <div className="p-6 flex flex-row justify-start items-center rounded-3xl">
             <Image
               src={module1}
-              alt="Aiho logo"
+              alt="Module"
               width={75}
               height={75}
               className="rounded-xl"
             />
             <div className="pl-2 flex flex-col">
               <h3 className="text-xl font-semibold">Property Card</h3>
-              <h4 className="text-gray-400">12 Ursula St</h4>
+              <h4 className="text-gray-400">
+                Developer: <span className="text-blue-600">Ratio1</span>
+              </h4>
             </div>
           </div>
           <div className="px-6 pb-6">
@@ -53,18 +55,21 @@ const page = () => {
           <div className="p-6 flex flex-row justify-start items-center rounded-3xl">
             <Image
               src={module0}
-              alt="Aiho logo"
+              alt="Module"
               width={75}
               height={75}
               className="rounded-xl"
             />
             <div className="pl-2 flex flex-col">
-              <h3 className="text-xl font-semibold">Intrusion Detection</h3>
-              <h4 className="text-gray-400">12 Ursula St</h4>
+              <h3 className="text-xl font-semibold">Home Security</h3>
+              <h4 className="text-gray-400">
+                Developer:{" "}
+                <span className="text-blue-600">0x3a9f...b1c4e2</span>
+              </h4>
             </div>
           </div>
           <div className="px-6 pb-6">
-            The Intrusion Detection module uses AI to monitor activity at the
+            The Home Security module uses AI to monitor activity at the
             property’s door and detect suspicious behavior. When potential
             intrusion is identified, it instantly sends a warning or
             notification to the user, helping them respond quickly and stay
@@ -76,14 +81,16 @@ const page = () => {
           <div className="p-6 flex flex-row justify-start items-center rounded-3xl">
             <Image
               src={module2}
-              alt="Aiho logo"
+              alt="Module"
               width={75}
               height={75}
               className="rounded-xl"
             />
             <div className="pl-2 flex flex-col">
               <h3 className="text-xl font-semibold">Predictive Maintenance</h3>
-              <h4 className="text-gray-400">12 Ursula St</h4>
+              <h4 className="text-gray-400">
+                Developer: <span className="text-blue-600">Build21</span>
+              </h4>
             </div>
           </div>
           <div className="px-6 pb-6">
@@ -99,14 +106,17 @@ const page = () => {
           <div className="p-6 flex flex-row justify-start items-center rounded-3xl">
             <Image
               src={module6}
-              alt="Aiho logo"
+              alt="Module"
               width={75}
               height={75}
               className="rounded-xl"
             />
             <div className="pl-2 flex flex-col">
               <h3 className="text-xl font-semibold">Smart Lock</h3>
-              <h4 className="text-gray-400">12 Ursula St</h4>
+              <h4 className="text-gray-400">
+                Developer:{" "}
+                <span className="text-blue-600">0x1be7...90fa3d</span>
+              </h4>
             </div>
           </div>
           <div className="px-6 pb-6">
@@ -122,14 +132,17 @@ const page = () => {
           <div className="p-6 flex flex-row justify-start items-center rounded-3xl">
             <Image
               src={module4}
-              alt="Aiho logo"
+              alt="Module"
               width={75}
               height={75}
               className="rounded-xl"
             />
             <div className="pl-2 flex flex-col">
               <h3 className="text-xl font-semibold">Elder's Companion</h3>
-              <h4 className="text-gray-400">12 Ursula St</h4>
+              <h4 className="text-gray-400">
+                Developer:{" "}
+                <span className="text-blue-600">0x7d2c...e8d7a0</span>
+              </h4>
             </div>
           </div>
           <div className="px-6 pb-6">
@@ -145,21 +158,24 @@ const page = () => {
           <div className="p-6 flex flex-row justify-start items-center rounded-3xl">
             <Image
               src={module7}
-              alt="Aiho logo"
+              alt="Module"
               width={75}
               height={75}
               className="rounded-xl"
             />
             <div className="pl-2 flex flex-col">
               <h3 className="text-xl font-semibold">Sustainable Comfort</h3>
-              <h4 className="text-gray-400">12 Ursula St</h4>
+              <h4 className="text-gray-400">
+                Developer:{" "}
+                <span className="text-blue-600">0x54ee...c19a8f</span>
+              </h4>
             </div>
           </div>
           <div className="px-6 pb-6">
             The Sustainable Comfort module monitors your property’s usage
             patterns and intelligently adapts consumer devices to match your
             lifestyle. By optimizing energy consumption, it makes your home more
-            eco-friendly while helping reduce utility bills—delivering both
+            eco-friendly while helping reduce utility bills - delivering both
             comfort and sustainability.
           </div>
         </div>
@@ -168,14 +184,17 @@ const page = () => {
           <div className="p-6 flex flex-row justify-start items-center rounded-3xl">
             <Image
               src={module3}
-              alt="Aiho logo"
+              alt="Module"
               width={75}
               height={75}
               className="rounded-xl"
             />
             <div className="pl-2 flex flex-col">
               <h3 className="text-xl font-semibold">Development Inspector</h3>
-              <h4 className="text-gray-400">12 Ursula St</h4>
+              <h4 className="text-gray-400">
+                Developer:{" "}
+                <span className="text-blue-600">0xa492...3be76a</span>
+              </h4>
             </div>
           </div>
           <div className="px-6 pb-6">
@@ -191,14 +210,17 @@ const page = () => {
           <div className="p-6 flex flex-row justify-start items-center rounded-3xl">
             <Image
               src={module5}
-              alt="Aiho logo"
+              alt="Module"
               width={75}
               height={75}
               className="rounded-xl"
             />
             <div className="pl-2 flex flex-col">
               <h3 className="text-xl font-semibold">FitHabits</h3>
-              <h4 className="text-gray-400">12 Ursula St</h4>
+              <h4 className="text-gray-400">
+                Developer:{" "}
+                <span className="text-blue-600">0x6e01...d44f59</span>
+              </h4>
             </div>
           </div>
           <div className="px-6 pb-6">

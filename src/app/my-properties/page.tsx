@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { Build21PropertyAbi } from "src/Abi";
 import { scAddress } from "src/constants";
 import { useAccount, usePublicClient } from "wagmi";
+import { Wallet } from "@coinbase/onchainkit/wallet";
+import LoginButton from "../../components/LoginButton";
 
 const page = () => {
   const { address } = useAccount();
@@ -33,7 +35,7 @@ const page = () => {
               abi: Build21PropertyAbi,
               functionName: "tokenOfOwnerByIndex",
               args: [address, BigInt(i)],
-            }),
+            })
           );
         }
         Promise.all(tokenIdsPromises).then((ids) => {
@@ -70,40 +72,45 @@ const page = () => {
           </div>
         </div>
       </section>
+
       <section className="grid grid-cols-3 gap-4 w-full mt-12">
-        {isLoading && (
-          <div className="flex justify-center items-center w-full h-96">
+        {!address ? (
+          <div className="flex justify-center items-center w-full mt-24 col-span-3">
+            Login to see your properties
+          </div>
+        ) : isLoading ? (
+          <div className="flex justify-center items-center w-full h-96 col-span-3">
             <p className="text-gray-500">Loading...</p>
           </div>
-        )}
-        {!isLoading && tokenIds.length === 0 && (
-          <div className="flex justify-center items-center w-full h-96">
+        ) : tokenIds.length === 0 ? (
+          <div className="flex justify-center items-center w-full h-96 col-span-3">
             <p className="text-gray-500">No properties found.</p>
           </div>
-        )}
-        {tokenIds.map((tokenId) => (
-          <a href={"/property/" + tokenId} key={tokenId}>
-            <div className="flex flex-col justify-center bg-white rounded-3xl">
-              <div className="rounded-3xl">
-                <Image
-                  src={FlatImage}
-                  alt="Aiho logo"
-                  width={1200}
-                  height={37.5}
-                  className="rounded-t-3xl"
-                />
-              </div>
-              <div className="p-6 flex flex-col">
-                <h3 className="text-xl font-semibold">Flat {tokenId}</h3>
-                <h4 className="text-gray-400">12 Ursula St</h4>
-                <div className="flex flex-row justify-between items-center mt-4">
-                  <div className="font-semibold">Real Estate Developer</div>
-                  <div className="text-gray-400">Build21</div>
+        ) : (
+          tokenIds.map((tokenId) => (
+            <a href={"/property/" + tokenId} key={tokenId}>
+              <div className="flex flex-col justify-center bg-white rounded-3xl">
+                <div className="rounded-3xl">
+                  <Image
+                    src={FlatImage}
+                    alt="Aiho logo"
+                    width={1200}
+                    height={37.5}
+                    className="rounded-t-3xl"
+                  />
+                </div>
+                <div className="p-6 flex flex-col">
+                  <h3 className="text-xl font-semibold">Flat {tokenId}</h3>
+                  <h4 className="text-gray-400">12 Ursula St</h4>
+                  <div className="flex flex-row justify-between items-center mt-4">
+                    <div className="font-semibold">Real Estate Developer</div>
+                    <div className="text-gray-400">Build21</div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </a>
-        ))}
+            </a>
+          ))
+        )}
       </section>
     </div>
   );

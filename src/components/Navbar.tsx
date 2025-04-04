@@ -23,10 +23,7 @@ const Navbar = () => {
             <a href="/modules">Modules</a>
           </div>
           <div className="font-medium">
-            <a href="/my-account">My account</a>
-          </div>
-          <div className="font-medium">
-            <a href="/mobile-app">Mobile App</a>
+            <a href="/mobile-app">Mobile Mock App</a>
           </div>
           <div className="flex items-center">
             {!address ? <LoginButton /> : <Wallet />}

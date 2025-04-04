@@ -73,7 +73,7 @@ const page = () => {
         <div className="flex-col justify-center items-center w-[800px]">
           <div className="flex flex-col justify-center bg-white rounded-3xl">
             <div className="p-6 flex flex-col gap-6">
-              <h3 className="text-xl font-semibold">Bought Modules</h3>
+              <h3 className="text-xl font-semibold">Modules</h3>
               <div className="flex flex-row gap-4 items-start">
                 {allModules.map((module) => {
                   const hasBoughtModule =
