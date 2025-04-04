@@ -81,19 +81,25 @@ const page = () => {
                   return (
                     <a
                       href={`/module/${propertyId}/${module.id}`}
-                      className="flex flex-col items-center justify-center gap-1"
+                      className="flex flex-col items-center justify-center gap-1 bg-white shadow-md rounded-3xl w-[100px]"
                       key={module.id.toString()}
                     >
                       <Image
                         src={`/modules/${module.id.toString()}.png`}
                         alt={module.name}
-                        width={50}
-                        height={50}
-                        className="rounded-lg"
+                        width={100}
+                        height={100}
+                        className="rounded-t-lg"
                       />
-                      <div className="text-xs">
-                        {!hasBoughtModule && "Buy "}
+                      <div className="text-xs text-center h-[31px]">
                         {module.name}
+                      </div>
+                      <div
+                        className={`flex flex-row items-center justify-center text-[10px] w-full font-medium py-1 bg-gray-50 rounded-b-lg ${
+                          hasBoughtModule ? "text-green-600" : "text-red-500"
+                        }`}
+                      >
+                        {hasBoughtModule ? "Subscribed" : "Not Subscribed"}
                       </div>
                     </a>
                   );
