@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import pdf from "../../../public/PDF.png";
 import { getHomeSecurityEvents } from "src/api";
 import { useParams } from "next/navigation";
 
@@ -20,6 +19,7 @@ const HomeSecurity = () => {
       base64img: string;
     }[]
   >([]);
+  const [lastHomeSecurityPing, setLastHomeSecurityPing] = useState<number>(0);
 
   const refreshEvents = () =>
     getHomeSecurityEvents(Number(propertyId), 10).then((res) => {
@@ -27,6 +27,7 @@ const HomeSecurity = () => {
         setEvents([]);
         return;
       }
+      setLastHomeSecurityPing(res.last_home_security_ping);
       setEvents(res.events.sort((a, b) => b.timestamp - a.timestamp));
     });
 
@@ -41,6 +42,13 @@ const HomeSecurity = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h3 className="text-xl font-semibold">Intrusion Detection Events</h3>
+      </div>
+      <div className="flex justify-between items-center">
+        <h3 className="text-xl font-semibold">
+          Last Seen:{" "}
+          {new Date(lastHomeSecurityPing * 1000).toLocaleDateString()}{" "}
+          {new Date(lastHomeSecurityPing * 1000).toLocaleTimeString()}
+        </h3>
       </div>
 
       <div className="space-y-4">

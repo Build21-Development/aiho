@@ -14,6 +14,7 @@ export const getHomeSecurityEvents = (propertyId: number, nEvents: number) =>
           timestamp: number;
           base64img: string;
         }[];
+        last_home_security_ping: number;
       }
     | {
         status: "no_event";
