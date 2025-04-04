@@ -17,11 +17,13 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Onchain App Template",
-  description: "Built with OnchainKit",
+  title: "Aiho - your smart property companion",
+  description:
+    "Intelligently managing smart properties with a next-gen, AI and blockchain-powered property management app.",
   openGraph: {
-    title: "Onchain App Template",
-    description: "Built with OnchainKit",
+    title: "Aiho - your smart property companion",
+    description:
+      "Intelligently managing smart properties with a next-gen, AI and blockchain-powered property management app.",
     images: [`${NEXT_PUBLIC_URL}/vibes/vibes-19.png`],
   },
 };
@@ -34,13 +36,33 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex items-center justify-center bg-gray-50">
-        <OnchainProviders>
-          <div className="flex flex-row justify-center items-center">
-            <Navbar />
+        <div className="hidden lg:block">
+          <OnchainProviders>
+            <div className="flex flex-row justify-center items-center">
+              <Navbar />
+            </div>
+            <main>{children}</main>
+            <Footer />
+          </OnchainProviders>
+        </div>
+        <div className="block lg:hidden">
+          <div className="bg-white p-6 rounded-xl shadow border w-full max-w-sm mx-auto text-center">
+            <h1 className="text-2xl font-semibold mb-3">Desktop Only</h1>
+            <p className="text-gray-600">
+              This app is available only on desktop.
+            </p>
+            <p className="mt-2 text-gray-600">
+              If you're on a mobile device, please check out our{" "}
+              <a
+                href="https://aiho.ai/"
+                className="text-blue-600 underline hover:text-blue-800"
+              >
+                mobile mock app
+              </a>
+              .
+            </p>
           </div>
-          <main>{children}</main>
-          <Footer />
-        </OnchainProviders>
+        </div>
       </body>
     </html>
   );
