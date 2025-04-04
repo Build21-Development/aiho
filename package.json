@@ -20,6 +20,7 @@
         "@coinbase/onchainkit": "^0.38.4",
         "@rainbow-me/rainbowkit": "^2.2.4",
         "lucide-react": "^0.487.0",
+        "axios": "^1.8.4",
         "next": "^15.2.4",
         "permissionless": "^0.1.26",
         "react": "^18",
