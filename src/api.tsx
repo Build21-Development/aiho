@@ -22,38 +22,26 @@ export const getHomeSecurityEvents = (propertyId: number, nEvents: number) =>
   >(`/get_home_security_events?propertyId=${propertyId}&nEvents=${nEvents}`);
 
 export const getPropertyCardDocuments = (propertyId: number) =>
-  _doGet<
-    | {
-        status: "ok";
-        documents: {
-          document: {
-            timestamp: number;
-            cid: string;
-            fileName: string;
-          };
-        }[];
-      }
-    | {
-        status: "no_document";
-        documents: [];
-      }
-  >(`/get_property_card_documents?propertyId=${propertyId}`);
+  _doGet<{
+    status: "ok";
+    documents: {
+      timestamp: number;
+      cid: string;
+      fileName: string;
+    }[];
+  }>(`/get_property_documents_list?propertyId=${propertyId}`);
 
 export const getPropertyCardDocument = (propertyId: number, cid: string) =>
   _doGet<
     | {
         status: "ok";
-        base64File: string;
+        document: string;
       }
     | {
-        status: "no_document";
-        message: string;
+        status: "error";
+        message: "File not found" | "Document not found";
       }
-    | {
-        status: "not_found";
-        base64File: null;
-      }
-  >(`/get_property_card_document?propertyId=${propertyId}&cid=${cid}`);
+  >(`/get_property_document?propertyId=${propertyId}&cid=${cid}`);
 
 // *****
 // POST
@@ -62,15 +50,15 @@ export const getPropertyCardDocument = (propertyId: number, cid: string) =>
 export const newPropertyCardDocument = (
   propertyId: number,
   fileName: string,
-  base64File: string,
+  base64document: string,
 ) =>
   _doPost<{
     status: "ok";
     cid: string;
-  }>(`/new_property_card_document`, {
+  }>(`/new_property_document`, {
     propertyId,
     fileName,
-    base64File,
+    base64document,
   });
 
 // *****

@@ -18,11 +18,9 @@ const PropertyCard = () => {
   const [showModal, setShowModal] = useState(false);
   const [documents, setDocuments] = useState<
     {
-      document: {
-        timestamp: number;
-        cid: string;
-        fileName: string;
-      };
+      timestamp: number;
+      cid: string;
+      fileName: string;
     }[]
   >([]);
   const [base64File, setBase64File] = useState<string | null>(null);
@@ -46,11 +44,7 @@ const PropertyCard = () => {
 
   const refreshDocuments = () =>
     getPropertyCardDocuments(Number(propertyId)).then((res) => {
-      setDocuments(
-        res.documents.sort(
-          (a, b) => b.document.timestamp - a.document.timestamp,
-        ),
-      );
+      setDocuments(res.documents.sort((a, b) => b.timestamp - a.timestamp));
     });
 
   useEffect(() => {
@@ -72,7 +66,7 @@ const PropertyCard = () => {
       <div className="space-y-4">
         {documents.map((doc) => (
           <div
-            key={doc.document.timestamp}
+            key={doc.timestamp}
             className="flex justify-between items-center gap-2"
           >
             <Image
@@ -84,31 +78,29 @@ const PropertyCard = () => {
             />
             <div className="flex flex-row justify-between items-center gap-3 p-4 border rounded-lg shadow-sm bg-white w-full h-[75px]">
               <div className="flex flex-col justify-center items-start">
-                <span className="font-semibold">{doc.document.fileName}</span>
+                <span className="font-semibold">{doc.fileName}</span>
                 <span className="font-medium text-gray-400">
                   Uploaded:{" "}
-                  {new Date(doc.document.timestamp * 1000).toLocaleDateString()}{" "}
-                  {new Date(doc.document.timestamp * 1000).toLocaleTimeString()}{" "}
-                  / Size: 1mb
+                  {new Date(doc.timestamp * 1000).toLocaleDateString()}{" "}
+                  {new Date(doc.timestamp * 1000).toLocaleTimeString()} / Size:
+                  1mb
                 </span>
               </div>
 
               <button
                 className="text-blue-600 border border-blue-600 px-3 py-1 rounded hover:bg-blue-50 transition"
                 onClick={() => {
-                  getPropertyCardDocument(Number(propertyId), doc.document.cid)
+                  getPropertyCardDocument(Number(propertyId), doc.cid)
                     .then((res) => {
                       if (res.status === "ok") {
-                        alert(res.base64File);
+                        const link = document.createElement("a");
+                        link.href = `data:application/pdf;base64,${res.document}`;
+                        link.download = doc.fileName;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
                       } else {
-                        if (res.status === "not_found") {
-                          alert(
-                            "The document is not available for download. Please try again later.",
-                          );
-                        }
-                        if (res.status === "no_document") {
-                          alert("No document found.");
-                        }
+                        alert("Document not found");
                       }
                     })
                     .catch((err) => console.error(err));

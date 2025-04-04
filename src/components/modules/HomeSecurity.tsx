@@ -105,9 +105,8 @@ const HomeSecurity = () => {
             </button>
             <h4 className="text-lg font-semibold mb-4">Event Proof</h4>
             <div className="w-full h-64 relative rounded overflow-hidden">
-              {selectedDoc.base64img && selectedDoc.base64img}
               <Image
-                src={pdf}
+                src={`data:image/png;base64,${selectedDoc.base64img}`}
                 alt="Proof Image"
                 fill
                 className="object-contain"
