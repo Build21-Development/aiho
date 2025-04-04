@@ -9,7 +9,7 @@ import { scAddress } from "src/constants";
 import { Build21PropertyAbi } from "src/Abi";
 import HomeSecurity from "src/components/modules/HomeSecurity";
 import PropertyCard from "src/components/modules/PropertyCard";
-import PredictiveMaintenance from "src/components/modules/PropertyCard";
+import PredictiveMaintenance from "src/components/modules/PredictiveMaintenance";
 import { formatUnits } from "viem";
 import TransactionWrapper from "src/components/TransactionWrapper";
 import { formatAmount } from "@coinbase/onchainkit/token";
@@ -55,7 +55,7 @@ const page = () => {
       })
       .then((tokenModules) => {
         setHasBoughtModule(
-          tokenModules.find((m) => m.toString() === moduleId) !== undefined
+          tokenModules.find((m) => m.toString() === moduleId) !== undefined,
         );
       });
   }, [address, propertyId, publicClient, refresher]);
@@ -92,7 +92,7 @@ const page = () => {
                         className="rounded-xl"
                       />
                       <div className="pl-2 flex flex-col">
-                        <h3 className="text-xl font-semibold">Home Security</h3>
+                        <h3 className="text-xl font-semibold">Home Safety</h3>
                         <h4 className="text-gray-400">
                           Developer:{" "}
                           <span className="text-blue-600">0x3a9f...b1c4e2</span>
@@ -100,11 +100,11 @@ const page = () => {
                       </div>
                     </div>
                     <div className="px-6 pb-6">
-                      The Home Security module uses AI to monitor activity at
-                      the property’s door and detect suspicious behavior. When
-                      potential intrusion is identified, it instantly sends a
-                      warning or notification to the user, helping them respond
-                      quickly and stay secure.
+                      The Home Safety module uses AI to monitor activity at the
+                      property’s public entrancies. When a potentially dangerous
+                      situation is identified, it instantly sends a warning or
+                      notification including the proofs to the user, helping
+                      them respond quickly and stay secure.
                     </div>
 
                     {hasBoughtModule ? (

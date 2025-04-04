@@ -22,6 +22,37 @@ export const getHomeSecurityEvents = (propertyId: number, nEvents: number) =>
       }
   >(`/get_home_security_events?propertyId=${propertyId}&nEvents=${nEvents}`);
 
+export const getPredictiveMaintenanceEvents = (
+  propertyId: number,
+  nEvents: number,
+) =>
+  _doGet<
+    | {
+        status: "ok";
+        events: ({
+          timestamp: number;
+        } & ({ temperature: number } | { humidity: number }))[];
+      }
+    | {
+        status: "no_event";
+        event: null;
+      }
+  >(
+    `/get_predictive_maintenance_events?propertyId=${propertyId}&nEvents=${nEvents}`,
+  );
+
+export const getPredictiveMaintenanceMeasurements = (propertyId: number) =>
+  _doGet<
+    | {
+        status: "ok";
+        measurements: any[];
+      }
+    | {
+        status: "no_event";
+        event: null;
+      }
+  >(`/get_predictive_maintenance_measurements?propertyId=${propertyId}`);
+
 export const getPropertyCardDocuments = (propertyId: number) =>
   _doGet<{
     status: "ok";

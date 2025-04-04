@@ -35,13 +35,13 @@ const HomeSecurity = () => {
     refreshEvents();
     setInterval(() => {
       refreshEvents();
-    }, 20_000);
+    }, 10_000);
   }, [propertyId]);
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h3 className="text-xl font-semibold">Intrusion Detection Events</h3>
+        <h3 className="text-xl font-semibold">Suspicious Events Detected</h3>
       </div>
       <div className="flex justify-between items-center">
         <h3 className="text-xl font-semibold">
