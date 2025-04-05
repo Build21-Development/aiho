@@ -25,6 +25,9 @@ const Navbar = () => {
           <div className="font-medium">
             <a href="/mobile-app">Mobile Mock App</a>
           </div>
+          <div className="font-medium">
+            <a href="/about">About</a>
+          </div>
           <div className="flex items-center">
             {!address ? <LoginButton /> : <Wallet />}
           </div>
